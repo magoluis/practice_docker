@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  bd:
+    build: ./database-service
+    ports:
+      - "3307:3306"
+
+  front:
+    build: ./frontend
+    ports:
+     - "9091:80"
+
+  backend:
+    build: ./APIREST
+    ports:
+     - "3000:3000"
+    environment:
+     - DATABASE_HOST=db
+    depends_on:
+      - bd
+    command: sleep 600
